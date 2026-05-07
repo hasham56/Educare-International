@@ -6,7 +6,7 @@ const testimonials = [
     role: 'IELTS Student → UK University',
     band: 'Band 7.5',
     avatar: 'FM',
-    color: 'bg-pink-500',
+    bg: '#8e2778',
     text: 'EduCare International completely transformed my IELTS preparation. My Speaking instructor was exceptional — I went from Band 5.5 to 7.5 in just two months. Now I am studying at the University of Manchester!',
   },
   {
@@ -14,7 +14,7 @@ const testimonials = [
     role: 'PTE Student → Australia PR',
     band: 'PTE 79',
     avatar: 'AH',
-    color: 'bg-blue-500',
+    bg: '#692658',
     text: 'I had failed PTE twice before joining EduCare. Their structured approach and AI-based mock tests were a game changer. Scored 79 and got my Australian visa approved within weeks. Highly recommended!',
   },
   {
@@ -22,7 +22,7 @@ const testimonials = [
     role: 'Visa Consultancy → Canada Study Permit',
     band: 'Accepted!',
     avatar: 'ZA',
-    color: 'bg-teal-500',
+    bg: '#a86699',
     text: 'From university selection to visa documentation, the EduCare team guided me every step of the way. I was accepted to three Canadian universities. Their consultants truly know what they are doing.',
   },
   {
@@ -30,7 +30,7 @@ const testimonials = [
     role: 'Spoken English → Career Growth',
     band: 'Promoted!',
     avatar: 'UR',
-    color: 'bg-amber-500',
+    bg: '#8e2778',
     text: 'The Spoken English course at EduCare gave me the confidence to present in English at work. I got promoted within 3 months of completing the course. The instructors are extremely supportive and professional.',
   },
   {
@@ -38,7 +38,7 @@ const testimonials = [
     role: 'IELTS Student → New Zealand',
     band: 'Band 7.0',
     avatar: 'SK',
-    color: 'bg-purple-500',
+    bg: '#692658',
     text: 'Outstanding preparation materials and incredibly dedicated teachers. I achieved exactly the band I needed for my nursing registration in New Zealand. EduCare made it all possible!',
   },
   {
@@ -46,52 +46,59 @@ const testimonials = [
     role: 'PTE + Visa → UK Work Visa',
     band: 'PTE 73',
     avatar: 'BS',
-    color: 'bg-green-500',
+    bg: '#a86699',
     text: 'Took both PTE preparation and visa consultancy services. The team is incredibly knowledgeable, always available, and truly cares about your success. I am now working in London!',
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 bg-gray-50">
+    <section id="testimonials" className="py-20" style={{ background: '#faf4fa' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">Success Stories</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4">
+          <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: '#8e2778' }}>
+            Success Stories
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold mt-2 mb-4" style={{ color: '#202221' }}>
             What Our Students Say
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#888085' }}>
             Real stories from real students who achieved their international dreams with EduCare International.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {testimonials.map(({ name, role, band, avatar, color, text }) => (
+          {testimonials.map(({ name, role, band, avatar, bg, text }) => (
             <div
               key={name}
-              className="bg-white rounded-2xl border border-gray-200 p-7 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              className="bg-white rounded-2xl border p-7 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              style={{ borderColor: '#dcbad4' }}
             >
               {/* Stars */}
               <div className="flex gap-1 mb-5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+                  <Star key={i} size={16} style={{ fill: '#8e2778', color: '#8e2778' }} />
                 ))}
               </div>
 
-              {/* Quote */}
-              <Quote size={20} className="text-blue-200 mb-3" />
-              <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">"{text}"</p>
+              <Quote size={20} style={{ color: '#dcbad4' }} className="mb-3" />
+              <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: '#888085' }}>"{text}"</p>
 
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
-                <div className={`w-11 h-11 rounded-full ${color} text-white font-bold text-sm flex items-center justify-center flex-shrink-0`}>
+              <div className="flex items-center gap-3 pt-5 border-t" style={{ borderColor: '#dcbad4' }}>
+                <div
+                  className="w-11 h-11 rounded-full text-white font-bold text-sm flex items-center justify-center flex-shrink-0"
+                  style={{ background: bg }}
+                >
                   {avatar}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-gray-900 text-sm">{name}</div>
-                  <div className="text-gray-400 text-xs truncate">{role}</div>
+                  <div className="font-semibold text-sm" style={{ color: '#202221' }}>{name}</div>
+                  <div className="text-xs truncate" style={{ color: '#888085' }}>{role}</div>
                 </div>
-                <span className="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0">
+                <span
+                  className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0"
+                  style={{ background: '#dcbad4', color: '#692658' }}
+                >
                   {band}
                 </span>
               </div>

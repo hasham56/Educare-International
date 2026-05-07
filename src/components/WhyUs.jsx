@@ -35,7 +35,11 @@ const reasons = [
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 relative overflow-hidden">
+    <section
+      id="why-us"
+      className="py-20 relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #202221 0%, #692658 60%, #8e2778 100%)' }}
+    >
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -50,11 +54,13 @@ export default function WhyUs() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-yellow-400 font-semibold text-sm tracking-widest uppercase">Our Advantage</span>
+          <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: '#dcbad4' }}>
+            Our Advantage
+          </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-4">
             Why Choose EduCare International?
           </h2>
-          <p className="text-blue-200 text-lg max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#c995bd' }}>
             We don't just teach — we invest in your success. Here's why thousands of students trust us.
           </p>
         </div>
@@ -63,13 +69,17 @@ export default function WhyUs() {
           {reasons.map(({ icon, title, desc }) => (
             <div
               key={title}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-7 hover:bg-white/15 transition-all duration-300 group"
+              className="backdrop-blur-sm border rounded-2xl p-7 hover:bg-white/10 transition-all duration-300 group"
+              style={{ background: 'rgba(255,255,255,0.07)', borderColor: 'rgba(201,149,189,0.3)' }}
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-yellow-400 text-blue-900 rounded-xl mb-5 group-hover:scale-110 transition-transform duration-300">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-5 group-hover:scale-110 transition-transform duration-300"
+                style={{ background: '#dcbad4', color: '#692658' }}
+              >
                 {icon}
               </div>
               <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-              <p className="text-blue-200 leading-relaxed text-sm">{desc}</p>
+              <p className="leading-relaxed text-sm" style={{ color: '#c995bd' }}>{desc}</p>
             </div>
           ))}
         </div>

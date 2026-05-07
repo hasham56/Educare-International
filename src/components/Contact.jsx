@@ -15,9 +15,9 @@ const contactInfo = [
   {
     icon: <Phone size={20} />,
     label: 'Phone',
-    value: '+92 300 0000000',
+    value: '+92 42 3529 6000',
     sub: 'Mon – Sat, 9 AM – 7 PM',
-    href: 'tel:+923000000000',
+    href: 'tel:+924235296000',
   },
   {
     icon: <Mail size={20} />,
@@ -37,7 +37,7 @@ const contactInfo = [
 const services = ['IELTS Preparation', 'PTE Academic', 'Spoken English', 'Visa Consultancy', 'Other'];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [form, setForm]           = useState({ name: '', phone: '', email: '', service: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
@@ -51,112 +51,154 @@ export default function Contact() {
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">Get In Touch</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4">
-            Contact & Location
+          <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: '#8e2778' }}>
+            Get In Touch
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold mt-2 mb-4" style={{ color: '#202221' }}>
+            Contact &amp; Location
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#888085' }}>
             Ready to start your journey? Reach out for a free counseling session or visit us in Lahore.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left — form + info */}
+          {/* Left — info + form */}
           <div className="space-y-8">
             {/* Contact info cards */}
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map(({ icon, label, value, sub, href }) => (
-                <div key={label} className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <div
+                  key={label}
+                  className="rounded-xl p-5 border"
+                  style={{ background: '#faf4fa', borderColor: '#dcbad4' }}
+                >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="bg-blue-100 text-blue-600 p-2 rounded-lg">{icon}</div>
-                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">{label}</span>
+                    <div
+                      className="p-2 rounded-lg"
+                      style={{ background: '#dcbad4', color: '#692658' }}
+                    >
+                      {icon}
+                    </div>
+                    <span className="text-xs font-semibold tracking-wide uppercase" style={{ color: '#888085' }}>
+                      {label}
+                    </span>
                   </div>
                   {href ? (
-                    <a href={href} className="text-gray-900 font-semibold text-sm hover:text-blue-600 transition-colors block">
+                    <a
+                      href={href}
+                      className="font-semibold text-sm block hover:underline"
+                      style={{ color: '#202221' }}
+                      target={href.startsWith('http') ? '_blank' : undefined}
+                      rel="noopener noreferrer"
+                    >
                       {value}
                     </a>
                   ) : (
-                    <div className="text-gray-900 font-semibold text-sm">{value}</div>
+                    <div className="font-semibold text-sm" style={{ color: '#202221' }}>{value}</div>
                   )}
-                  {sub && <div className="text-gray-400 text-xs mt-0.5">{sub}</div>}
+                  {sub && <div className="text-xs mt-0.5" style={{ color: '#888085' }}>{sub}</div>}
                 </div>
               ))}
             </div>
 
             {/* Form */}
-            <div className="bg-gray-50 rounded-2xl p-7 border border-gray-200">
-              <h3 className="text-xl font-bold text-gray-900 mb-5">Book a Free Consultation</h3>
+            <div className="rounded-2xl p-7 border" style={{ background: '#faf4fa', borderColor: '#dcbad4' }}>
+              <h3 className="text-xl font-bold mb-5" style={{ color: '#202221' }}>
+                Book a Free Consultation
+              </h3>
               {submitted ? (
-                <div className="flex items-center gap-3 text-green-700 bg-green-50 border border-green-200 rounded-xl p-5">
+                <div
+                  className="flex items-center gap-3 rounded-xl p-5 border"
+                  style={{ background: '#dcbad4', borderColor: '#c995bd', color: '#692658' }}
+                >
                   <CheckCircle size={24} />
                   <div>
                     <div className="font-semibold">Message Sent!</div>
-                    <div className="text-sm text-green-600">We'll contact you within 24 hours.</div>
+                    <div className="text-sm" style={{ color: '#8e2778' }}>We'll contact you within 24 hours.</div>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                      <label className="block text-sm font-medium mb-1" style={{ color: '#202221' }}>Full Name *</label>
                       <input
                         required
                         type="text"
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         placeholder="Your full name"
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border rounded-lg text-sm outline-none focus:ring-2 transition-all"
+                        style={{ borderColor: '#c995bd' }}
+                        onFocus={(e) => (e.target.style.borderColor = '#8e2778')}
+                        onBlur={(e) => (e.target.style.borderColor = '#c995bd')}
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+                      <label className="block text-sm font-medium mb-1" style={{ color: '#202221' }}>Phone *</label>
                       <input
                         required
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         placeholder="+92 3XX XXXXXXX"
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border rounded-lg text-sm outline-none transition-all"
+                        style={{ borderColor: '#c995bd' }}
+                        onFocus={(e) => (e.target.style.borderColor = '#8e2778')}
+                        onBlur={(e) => (e.target.style.borderColor = '#c995bd')}
                       />
                     </div>
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <label className="block text-sm font-medium mb-1" style={{ color: '#202221' }}>Email</label>
                     <input
                       type="email"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="you@example.com"
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2.5 border rounded-lg text-sm outline-none transition-all"
+                      style={{ borderColor: '#c995bd' }}
+                      onFocus={(e) => (e.target.style.borderColor = '#8e2778')}
+                      onBlur={(e) => (e.target.style.borderColor = '#c995bd')}
                     />
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Interested In *</label>
+                    <label className="block text-sm font-medium mb-1" style={{ color: '#202221' }}>Interested In *</label>
                     <select
                       required
                       value={form.service}
                       onChange={(e) => setForm({ ...form, service: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                      className="w-full px-4 py-2.5 border rounded-lg text-sm outline-none bg-white transition-all"
+                      style={{ borderColor: '#c995bd' }}
                     >
                       <option value="">Select a service</option>
-                      {services.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
+                      {services.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                    <label className="block text-sm font-medium mb-1" style={{ color: '#202221' }}>Message</label>
                     <textarea
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       rows={3}
                       placeholder="Tell us about your goals..."
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-2.5 border rounded-lg text-sm outline-none transition-all resize-none"
+                      style={{ borderColor: '#c995bd' }}
+                      onFocus={(e) => (e.target.style.borderColor = '#8e2778')}
+                      onBlur={(e) => (e.target.style.borderColor = '#c995bd')}
                     />
                   </div>
+
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors"
+                    className="w-full inline-flex items-center justify-center gap-2 text-white font-semibold py-3 rounded-lg transition-colors"
+                    style={{ background: '#8e2778' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#692658')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = '#8e2778')}
                   >
                     <Send size={18} />
                     Send Message
@@ -166,8 +208,8 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right — embedded map */}
-          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-lg h-full min-h-[500px]">
+          {/* Right — map */}
+          <div className="rounded-2xl overflow-hidden border shadow-lg min-h-[500px]" style={{ borderColor: '#dcbad4' }}>
             <iframe
               title="EduCare International Location"
               width="100%"
