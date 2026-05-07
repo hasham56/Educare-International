@@ -31,6 +31,15 @@ export default function About() {
                 <div className="text-sm mt-1" style={{ color: '#dcbad4' }}>Lahore, Pakistan</div>
               </div>
 
+              {/* Badge — inside the card on mobile only */}
+              <div
+                className="absolute bottom-4 right-4 rounded-xl p-3 shadow-xl font-bold text-center text-white sm:hidden"
+                style={{ background: '#692658', border: '2px solid rgba(220,186,212,0.4)' }}
+              >
+                <div className="text-xl font-extrabold">10+</div>
+                <div className="text-xs" style={{ color: '#dcbad4' }}>Years Trusted</div>
+              </div>
+
               {/* Grid overlay */}
               <div className="absolute inset-0 opacity-10">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -44,17 +53,17 @@ export default function About() {
               </div>
             </div>
 
-            {/* Floating badge */}
+            {/* Floating badge — outside the card, sm+ only */}
             <div
-              className="absolute -bottom-5 right-4 sm:-bottom-6 sm:-right-6 rounded-2xl p-4 sm:p-5 shadow-xl font-bold text-center text-white"
+              className="hidden sm:block absolute -bottom-6 -right-6 rounded-2xl p-5 shadow-xl font-bold text-center text-white"
               style={{ background: '#692658' }}
             >
-              <div className="text-2xl sm:text-3xl font-extrabold">10+</div>
-              <div className="text-xs sm:text-sm" style={{ color: '#dcbad4' }}>Years Trusted</div>
+              <div className="text-3xl font-extrabold">10+</div>
+              <div className="text-sm" style={{ color: '#dcbad4' }}>Years Trusted</div>
             </div>
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 gap-4 mt-12">
+            <div className="grid grid-cols-2 gap-4 mt-6 sm:mt-12">
               {stats.map(({ icon, value, label }) => (
                 <div
                   key={label}
