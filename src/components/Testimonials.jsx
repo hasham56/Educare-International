@@ -84,19 +84,21 @@ export default function Testimonials() {
               <Quote size={20} style={{ color: '#dcbad4' }} className="mb-3" />
               <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: '#888085' }}>"{text}"</p>
 
-              <div className="flex items-center gap-3 pt-5 border-t" style={{ borderColor: '#dcbad4' }}>
-                <div
-                  className="w-11 h-11 rounded-full text-white font-bold text-sm flex items-center justify-center flex-shrink-0"
-                  style={{ background: bg }}
-                >
-                  {avatar}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-sm" style={{ color: '#202221' }}>{name}</div>
-                  <div className="text-xs truncate" style={{ color: '#888085' }}>{role}</div>
+              <div className="pt-5 border-t" style={{ borderColor: '#dcbad4' }}>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div
+                    className="w-10 h-10 rounded-full text-white font-bold text-sm flex items-center justify-center flex-shrink-0"
+                    style={{ background: bg }}
+                  >
+                    {avatar}
+                  </div>
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="font-semibold text-sm truncate" style={{ color: '#202221' }}>{name}</div>
+                    <div className="text-xs truncate" style={{ color: '#888085' }}>{role}</div>
+                  </div>
                 </div>
                 <span
-                  className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0"
+                  className="inline-block mt-2 text-xs font-semibold px-2.5 py-1 rounded-full"
                   style={{ background: '#dcbad4', color: '#692658' }}
                 >
                   {band}

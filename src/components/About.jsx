@@ -46,11 +46,11 @@ export default function About() {
 
             {/* Floating badge */}
             <div
-              className="absolute -bottom-6 -right-6 rounded-2xl p-5 shadow-xl font-bold text-center text-white"
+              className="absolute -bottom-5 right-4 sm:-bottom-6 sm:-right-6 rounded-2xl p-4 sm:p-5 shadow-xl font-bold text-center text-white"
               style={{ background: '#692658' }}
             >
-              <div className="text-3xl font-extrabold">10+</div>
-              <div className="text-sm" style={{ color: '#dcbad4' }}>Years Trusted</div>
+              <div className="text-2xl sm:text-3xl font-extrabold">10+</div>
+              <div className="text-xs sm:text-sm" style={{ color: '#dcbad4' }}>Years Trusted</div>
             </div>
 
             {/* Stats row */}
