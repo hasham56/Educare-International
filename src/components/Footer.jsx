@@ -23,28 +23,39 @@ export default function Footer() {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer style={{ background: '#202221', color: '#888085' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">E</div>
+              <img
+                src="/educare_logo.png"
+                alt="EduCare International"
+                className="h-12 w-12 object-contain rounded-full"
+                style={{ background: 'white', padding: '4px' }}
+              />
               <div>
                 <div className="font-bold text-white text-lg leading-tight">EduCare International</div>
-                <div className="text-blue-400 text-xs font-medium tracking-widest">LAHORE, PAKISTAN</div>
+                <div className="text-xs font-medium tracking-widest" style={{ color: '#a86699' }}>
+                  LAHORE, PAKISTAN
+                </div>
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-6 max-w-sm">
-              Your trusted partner for IELTS, PTE, Spoken English, and international visa & education consultancy.
-              Empowering students to achieve their global ambitions since 2014.
+              Your trusted partner for IELTS, PTE, Spoken English, and international visa &amp;
+              education consultancy. Empowering students to achieve their global ambitions since 2014.
             </p>
             <div className="flex gap-3">
               <a
                 href="https://www.facebook.com/educare.lhr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors text-white"
+                style={{ background: '#2e2d2e' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#8e2778')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#2e2d2e')}
               >
                 <FacebookIcon />
               </a>
@@ -52,15 +63,21 @@ export default function Footer() {
                 href="https://www.instagram.com/educare.international/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors text-white"
+                style={{ background: '#2e2d2e' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#8e2778')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#2e2d2e')}
               >
                 <InstagramIcon />
               </a>
               <a
-                href="https://wa.me/923000000000"
+                href="https://wa.me/924235296000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors text-sm font-bold"
+                className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors text-white text-xs font-bold"
+                style={{ background: '#2e2d2e' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#8e2778')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#2e2d2e')}
               >
                 WA
               </a>
@@ -74,7 +91,7 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {items.map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-sm hover:text-white transition-colors hover:translate-x-1 inline-block">
+                    <a href="#" className="text-sm hover:text-white transition-colors inline-block">
                       {item}
                     </a>
                   </li>
@@ -85,9 +102,9 @@ export default function Footer() {
         </div>
 
         {/* Contact strip */}
-        <div className="mt-10 pt-8 border-t border-gray-800 grid sm:grid-cols-3 gap-4">
+        <div className="mt-10 pt-8 border-t grid sm:grid-cols-3 gap-4" style={{ borderColor: '#2e2d2e' }}>
           {[
-            { icon: <Phone size={16} />, text: '+92 300 0000000', href: 'tel:+923000000000' },
+            { icon: <Phone size={16} />, text: '+92 42 3529 6000', href: 'tel:+924235296000' },
             { icon: <Mail size={16} />, text: 'info@educareinternational.pk', href: 'mailto:info@educareinternational.pk' },
             { icon: <MapPin size={16} />, text: 'Lahore, Pakistan', href: 'https://maps.app.goo.gl/EsjNKmbxyrkVfsej6' },
           ].map(({ icon, text, href }) => (
@@ -98,20 +115,26 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm hover:text-white transition-colors"
             >
-              <span className="text-blue-400">{icon}</span>
+              <span style={{ color: '#a86699' }}>{icon}</span>
               {text}
             </a>
           ))}
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500">
+        <div
+          className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderColor: '#2e2d2e' }}
+        >
+          <p className="text-xs" style={{ color: '#888085' }}>
             © {new Date().getFullYear()} EduCare International. All rights reserved.
           </p>
           <button
             onClick={scrollTop}
-            className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition-colors bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded-lg"
+            className="flex items-center gap-2 text-xs px-3 py-2 rounded-lg transition-colors"
+            style={{ background: '#2e2d2e', color: '#888085' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#8e2778'; e.currentTarget.style.color = 'white'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = '#2e2d2e'; e.currentTarget.style.color = '#888085'; }}
           >
             Back to top <ArrowUp size={14} />
           </button>
