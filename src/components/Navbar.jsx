@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
   { label: 'Home',         href: '#home' },
@@ -11,7 +12,7 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [open, setOpen]       = useState(false);
+  const [open, setOpen]         = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,12 +27,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md' : 'bg-transparent'
-      }`}
-    >
-      {/* Top contact bar */}
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+      {/* Top bar */}
       <div className="bg-brand-600 text-white text-sm py-1.5 px-4 text-center hidden md:block">
         <span className="inline-flex items-center gap-2">
           <Phone size={13} />
@@ -47,27 +44,27 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button onClick={() => handleNav('#home')} className="flex items-center gap-3">
-            <img
+            <motion.img
               src="/educare_logo.png"
               alt="EduCare International"
               className="h-11 w-11 object-contain rounded-full"
+              whileHover={{ scale: 1.08, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
             />
             <div className="text-left hidden sm:block">
-              <div className={`font-bold text-lg leading-tight ${scrolled ? 'text-brand-600' : 'text-white'}`}>
-                EduCare
-              </div>
-              <div className={`text-xs font-semibold tracking-widest ${scrolled ? 'text-brand-300' : 'text-brand-100'}`}>
-                INTERNATIONAL
-              </div>
+              <div className={`font-bold text-lg leading-tight ${scrolled ? 'text-brand-600' : 'text-white'}`}>EduCare</div>
+              <div className={`text-xs font-semibold tracking-widest ${scrolled ? 'text-brand-300' : 'text-brand-100'}`}>INTERNATIONAL</div>
             </div>
           </button>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-0.5">
             {NAV_LINKS.map(({ label, href }) => (
-              <button
+              <motion.button
                 key={href}
                 onClick={() => handleNav(href)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   scrolled
                     ? 'text-brand-900 hover:text-brand-400 hover:bg-brand-50'
@@ -75,48 +72,61 @@ export default function Navbar() {
                 }`}
               >
                 {label}
-              </button>
+              </motion.button>
             ))}
-            <button
+            <motion.button
               onClick={() => handleNav('#contact')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="ml-3 bg-brand-400 hover:bg-brand-600 text-white font-semibold text-sm px-5 py-2 rounded-lg transition-colors shadow"
             >
               Enroll Now
-            </button>
+            </motion.button>
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            onClick={() => setOpen(!open)}
-            className={`md:hidden p-2 rounded-md ${scrolled ? 'text-brand-600' : 'text-white'}`}
-          >
+          <button onClick={() => setOpen(!open)} className={`md:hidden p-2 rounded-md ${scrolled ? 'text-brand-600' : 'text-white'}`}>
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-white shadow-xl border-t border-brand-100">
-          <div className="px-4 py-3 space-y-1">
-            {NAV_LINKS.map(({ label, href }) => (
-              <button
-                key={href}
-                onClick={() => handleNav(href)}
-                className="block w-full text-left px-4 py-2.5 text-brand-900 hover:text-brand-400 hover:bg-brand-50 rounded-md font-medium"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden bg-white shadow-xl border-t border-brand-100 overflow-hidden"
+          >
+            <div className="px-4 py-3 space-y-1">
+              {NAV_LINKS.map(({ label, href }, i) => (
+                <motion.button
+                  key={href}
+                  onClick={() => handleNav(href)}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="block w-full text-left px-4 py-2.5 text-brand-900 hover:text-brand-400 hover:bg-brand-50 rounded-md font-medium"
+                >
+                  {label}
+                </motion.button>
+              ))}
+              <motion.button
+                onClick={() => handleNav('#contact')}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="w-full mt-2 bg-brand-400 hover:bg-brand-600 text-white font-semibold py-2.5 rounded-lg transition-colors"
               >
-                {label}
-              </button>
-            ))}
-            <button
-              onClick={() => handleNav('#contact')}
-              className="w-full mt-2 bg-brand-400 hover:bg-brand-600 text-white font-semibold py-2.5 rounded-lg transition-colors"
-            >
-              Enroll Now
-            </button>
-          </div>
-        </div>
-      )}
+                Enroll Now
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
