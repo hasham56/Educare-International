@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { CONTACT, SERVICE_TOPICS, whatsappHref } from '../../shared/contact';
+import CallLink from '../../shared/CallLink';
 
 const LAT = 31.5026149;
 const LNG = 74.2830352;
 
 const contactInfo = [
   { icon: <MapPin size={20} />, label: 'Address',       value: 'Lahore, Punjab, Pakistan',       sub: 'Find us on Google Maps',   href: 'https://maps.app.goo.gl/EsjNKmbxyrkVfsej6' },
-  { icon: <Phone size={20} />,  label: 'Phone',         value: '+92 42 3529 6000',               sub: 'Mon – Sat, 9 AM – 7 PM',   href: 'tel:+924235296000' },
+  { icon: <Phone size={20} />,  label: 'Call Us',       value: CONTACT.phoneIntl,                sub: `WhatsApp: ${CONTACT.whatsapp}`, subHref: whatsappHref(), call: true },
   { icon: <Mail size={20} />,   label: 'Email',         value: 'info@educareinternational.pk',   sub: 'Reply within 24 hours',    href: 'mailto:info@educareinternational.pk' },
   { icon: <Clock size={20} />,  label: 'Working Hours', value: 'Mon – Sat: 9:00 AM – 7:00 PM',  sub: 'Sunday: Closed' },
 ];
@@ -57,7 +59,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <div className="grid sm:grid-cols-2 gap-4">
-              {contactInfo.map(({ icon, label, value, sub, href }, i) => (
+              {contactInfo.map(({ icon, label, value, sub, href, subHref, call }, i) => (
                 <motion.div
                   key={label}
                   className="rounded-xl p-5 border"
@@ -72,7 +74,11 @@ export default function Contact() {
                     <div className="p-2 rounded-lg" style={{ background: '#dcbad4', color: '#692658' }}>{icon}</div>
                     <span className="text-xs font-semibold tracking-wide uppercase" style={{ color: '#888085' }}>{label}</span>
                   </div>
-                  {href ? (
+                  {call ? (
+                    <CallLink accent="#8e2778" className="font-semibold text-sm block text-left hover:underline" style={{ color: '#202221' }}>
+                      {value}
+                    </CallLink>
+                  ) : href ? (
                     <a href={href} className="font-semibold text-sm block hover:underline" style={{ color: '#202221' }}
                       target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
                       {value}
@@ -80,10 +86,31 @@ export default function Contact() {
                   ) : (
                     <div className="font-semibold text-sm" style={{ color: '#202221' }}>{value}</div>
                   )}
-                  {sub && <div className="text-xs mt-0.5" style={{ color: '#888085' }}>{sub}</div>}
+                  {sub && (subHref ? (
+                    <a href={subHref} target="_blank" rel="noopener noreferrer"
+                      className="text-xs mt-0.5 block hover:underline" style={{ color: '#888085' }}>
+                      {sub}
+                    </a>
+                  ) : (
+                    <div className="text-xs mt-0.5" style={{ color: '#888085' }}>{sub}</div>
+                  ))}
                 </motion.div>
               ))}
             </div>
+
+            {/* WhatsApp CTA */}
+            <motion.a
+              href={whatsappHref(SERVICE_TOPICS[form.service] ?? 'general')}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex w-full items-center justify-center gap-2.5 rounded-xl px-6 py-3.5 font-semibold text-white"
+              style={{ background: '#25D366', boxShadow: '0 14px 30px rgba(37,211,102,0.28)' }}
+            >
+              <MessageCircle size={20} aria-hidden="true" />
+              Chat with us on WhatsApp
+            </motion.a>
 
             {/* Form */}
             <div className="rounded-2xl p-7 border" style={{ background: '#faf4fa', borderColor: '#dcbad4' }}>

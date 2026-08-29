@@ -2,9 +2,9 @@
 // Light section: four program cards (IELTS, PTE, Spoken English, Visa Consultancy).
 
 import { motion } from 'framer-motion';
-import { BookOpen, FileText, Mic2, Globe, ArrowRight } from 'lucide-react';
+import { BookOpen, FileText, Mic2, Globe, ArrowRight, MessageCircle } from 'lucide-react';
 
-import { C } from '../theme';
+import { C, whatsappHref } from '../theme';
 import {
   Container,
   SectionHeader,
@@ -21,6 +21,7 @@ const PROGRAMS = [
   {
     icon: BookOpen,
     title: 'IELTS Preparation',
+    topic: 'ielts',
     tag: 'Most Popular',
     description:
       'Comprehensive IELTS coaching across Listening, Reading, Writing & Speaking. Expert trainers help you target Band 7+ with structured practice and mock tests.',
@@ -34,6 +35,7 @@ const PROGRAMS = [
   {
     icon: FileText,
     title: 'PTE Academic',
+    topic: 'pte',
     tag: 'Fast Results',
     description:
       'Master the Pearson Test of English with AI-scored practice. PTE is accepted for study, work and migration to Australia, UK, Canada & NZ.',
@@ -47,6 +49,7 @@ const PROGRAMS = [
   {
     icon: Mic2,
     title: 'Spoken English',
+    topic: 'spoken',
     tag: 'Beginner Friendly',
     description:
       'Build real-world English communication — from everyday conversation to professional presentations, tailored to your level.',
@@ -60,6 +63,7 @@ const PROGRAMS = [
   {
     icon: Globe,
     title: 'Visa Consultancy',
+    topic: 'visa',
     tag: 'Expert Guidance',
     description:
       'End-to-end visa & student consultancy for the UK, Canada, Australia, Europe and more — from university selection to visa approval.',
@@ -94,7 +98,7 @@ export default function Services() {
           whileInView="visible"
           viewport={viewport}
         >
-          {PROGRAMS.map(({ icon: Icon, title, tag, description, features }) => (
+          {PROGRAMS.map(({ icon: Icon, title, topic, tag, description, features }) => (
             <motion.div key={title} variants={fadeUp} className="h-full">
               <Card className="h-full flex flex-col p-7">
                 {/* top accent rule */}
@@ -135,19 +139,32 @@ export default function Services() {
                   ))}
                 </ul>
 
-                <button
-                  type="button"
-                  onClick={() => scrollTo('#contact')}
-                  className="group mt-auto inline-flex items-center gap-1.5 text-sm font-semibold"
-                  style={{ color: C.royal }}
-                  aria-label={`Enroll now in ${title}`}
-                >
-                  Enroll Now
-                  <ArrowRight
-                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </button>
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => scrollTo('#contact')}
+                    className="group inline-flex items-center gap-1.5 text-sm font-semibold"
+                    style={{ color: C.royal }}
+                    aria-label={`Enroll now in ${title}`}
+                  >
+                    Enroll Now
+                    <ArrowRight
+                      className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <a
+                    href={whatsappHref(topic)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-80"
+                    style={{ color: '#128C4A' }}
+                    aria-label={`Ask about ${title} on WhatsApp`}
+                  >
+                    <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                    Ask on WhatsApp
+                  </a>
+                </div>
               </Card>
             </motion.div>
           ))}

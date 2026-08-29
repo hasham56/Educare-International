@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle } from 'lucide-react';
+import { CONTACT, whatsappHref } from '../../shared/contact';
+import CallLink from '../../shared/CallLink';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
@@ -32,9 +34,19 @@ export default function Navbar() {
       <div className="bg-brand-600 text-white text-sm py-1.5 px-4 text-center hidden md:block">
         <span className="inline-flex items-center gap-2">
           <Phone size={13} />
-          <a href="tel:+924235296000" className="hover:underline">+92 42 3529 6000</a>
+          <CallLink accent="#8e2778" className="hover:underline">{CONTACT.phoneIntl}</CallLink>
           <span className="mx-3 opacity-40">|</span>
-          <span>info@educareinternational.pk</span>
+          <a
+            href={whatsappHref()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:underline"
+          >
+            <MessageCircle size={13} />
+            {CONTACT.whatsapp}
+          </a>
+          <span className="mx-3 opacity-40">|</span>
+          <span>{CONTACT.email}</span>
           <span className="mx-3 opacity-40">|</span>
           <span>Mon–Sat: 9:00 AM – 7:00 PM</span>
         </span>
@@ -44,17 +56,20 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button onClick={() => handleNav('#home')} className="flex items-center gap-3">
-            <motion.img
-              src="/educare_logo.png"
-              alt="EduCare International"
-              className="h-11 w-11 object-contain rounded-full"
-              whileHover={{ scale: 1.08, rotate: 5 }}
+            <motion.span
+              className={`inline-flex items-center rounded-xl transition-colors duration-300 ${
+                scrolled ? '' : 'bg-white/95 px-2.5 py-1.5 shadow-sm'
+              }`}
+              whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
-            />
-            <div className="text-left hidden sm:block">
-              <div className={`font-bold text-lg leading-tight ${scrolled ? 'text-brand-600' : 'text-white'}`}>EduCare</div>
-              <div className={`text-xs font-semibold tracking-widest ${scrolled ? 'text-brand-300' : 'text-brand-100'}`}>INTERNATIONAL</div>
-            </div>
+            >
+              <img
+                src="/educare-logo.png"
+                alt="EduCare International — Where Education Meets Care"
+                className="h-9 sm:h-11 w-auto object-contain"
+                draggable={false}
+              />
+            </motion.span>
           </button>
 
           {/* Desktop nav */}

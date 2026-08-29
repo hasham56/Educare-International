@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, ArrowUp, MessageCircle } from 'lucide-react';
 import { C, CONTACT, whatsappHref } from '../theme';
 import { Container, scrollTo } from '../ui';
 import Logo from '../Logo';
+import CallLink from '../../shared/CallLink';
 
 const lightText = 'rgba(255,255,255,0.66)';
 const borderCol = 'rgba(255,255,255,0.12)';
@@ -86,13 +87,20 @@ function FooterLink({ onClick, children }) {
   );
 }
 
-function ContactItem({ icon: Icon, label, href }) {
+function ContactItem({ icon: Icon, label, href, call = false }) {
+  const Tag = call ? CallLink : 'a';
+  const tagProps = call
+    ? { accent: C.royal }
+    : {
+        href,
+        target: href.startsWith('http') ? '_blank' : undefined,
+        rel: href.startsWith('http') ? 'noopener noreferrer' : undefined,
+      };
+
   return (
-    <a
-      href={href}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      className="flex items-center gap-3 group min-w-0"
+    <Tag
+      {...tagProps}
+      className="flex items-center gap-3 group min-w-0 text-left w-full"
     >
       <span
         className="w-10 h-10 rounded-xl inline-flex items-center justify-center flex-shrink-0"
@@ -108,7 +116,7 @@ function ContactItem({ icon: Icon, label, href }) {
       >
         {label}
       </span>
-    </a>
+    </Tag>
   );
 }
 
@@ -180,8 +188,9 @@ export default function Footer() {
         </motion.div>
 
         {/* contact strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-8 border-t" style={{ borderColor: borderCol }}>
-          <ContactItem icon={Phone} label={CONTACT.landline} href={CONTACT.landlineTel} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8 border-t" style={{ borderColor: borderCol }}>
+          <ContactItem icon={Phone} label={CONTACT.phone} call />
+          <ContactItem icon={MessageCircle} label={CONTACT.whatsapp} href={whatsappHref()} />
           <ContactItem icon={Mail} label={CONTACT.email} href={`mailto:${CONTACT.email}`} />
           <ContactItem icon={MapPin} label={CONTACT.address} href={CONTACT.mapsUrl} />
         </div>

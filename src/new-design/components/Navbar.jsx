@@ -4,10 +4,11 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Mail, Menu, X } from 'lucide-react';
-import { C, GRADIENTS, CONTACT, NAV_LINKS } from '../theme';
+import { Phone, Mail, Menu, X, MessageCircle } from 'lucide-react';
+import { C, GRADIENTS, CONTACT, NAV_LINKS, whatsappHref } from '../theme';
 import { Container, PrimaryButton, scrollTo } from '../ui';
 import Logo from '../Logo';
+import CallLink from '../../shared/CallLink';
 
 const Sep = () => (
   <span aria-hidden="true" style={{ color: C.goldSoft }} className="opacity-60">
@@ -40,19 +41,19 @@ export default function Navbar() {
       >
         <Container className="flex items-center justify-between py-1.5">
           <div className="flex items-center gap-3 min-w-0">
-            <a
-              href={`tel:${CONTACT.landlineTel}`}
-              className="inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity"
-            >
+            <CallLink className="inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity">
               <Phone size={13} style={{ color: C.goldSoft }} />
-              <span>{CONTACT.landline}</span>
-            </a>
+              <span>{CONTACT.phone}</span>
+            </CallLink>
             <Sep />
             <a
-              href={`tel:${CONTACT.mobileTel}`}
-              className="hover:opacity-90 transition-opacity"
+              href={whatsappHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity"
             >
-              {CONTACT.mobile}
+              <MessageCircle size={13} style={{ color: '#8FE3AC' }} />
+              <span>{CONTACT.whatsapp}</span>
             </a>
             <Sep />
             <a
@@ -172,6 +173,28 @@ export default function Navbar() {
                 >
                   Reserve a Seat
                 </PrimaryButton>
+
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <CallLink
+                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3 text-sm font-semibold border"
+                    style={{ borderColor: C.lilacSoft, color: C.royal }}
+                    onClick={() => setOpen(false)}
+                  >
+                    <Phone size={16} aria-hidden="true" />
+                    Call
+                  </CallLink>
+                  <a
+                    href={whatsappHref()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white"
+                    style={{ background: '#25D366' }}
+                  >
+                    <MessageCircle size={16} aria-hidden="true" />
+                    WhatsApp
+                  </a>
+                </div>
               </Container>
             </motion.div>
           )}

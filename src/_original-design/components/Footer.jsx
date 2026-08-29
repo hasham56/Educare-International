@@ -1,4 +1,6 @@
-import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowUp, MessageCircle } from 'lucide-react';
+import { CONTACT, whatsappHref } from '../../shared/contact';
+import CallLink from '../../shared/CallLink';
 
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
@@ -29,18 +31,17 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-5">
-              <img
-                src="/educare_logo.png"
-                alt="EduCare International"
-                className="h-12 w-12 object-contain rounded-full"
-                style={{ background: 'white', padding: '4px' }}
-              />
-              <div>
-                <div className="font-bold text-white text-lg leading-tight">EduCare International</div>
-                <div className="text-xs font-medium tracking-widest" style={{ color: '#a86699' }}>
-                  LAHORE, PAKISTAN
-                </div>
+            <div className="mb-5">
+              <span className="inline-flex items-center rounded-xl bg-white px-3 py-2 shadow-sm">
+                <img
+                  src="/educare-logo.png"
+                  alt="EduCare International — Where Education Meets Care"
+                  className="h-10 w-auto object-contain"
+                  draggable={false}
+                />
+              </span>
+              <div className="mt-3 text-xs font-medium tracking-widest" style={{ color: '#a86699' }}>
+                LAHORE, PAKISTAN
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-6 max-w-sm">
@@ -71,15 +72,16 @@ export default function Footer() {
                 <InstagramIcon />
               </a>
               <a
-                href="https://wa.me/924235296000"
+                href={whatsappHref()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors text-white text-xs font-bold"
+                aria-label="Message EduCare on WhatsApp"
+                className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors text-white"
                 style={{ background: '#2e2d2e' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#8e2778')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#25D366')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = '#2e2d2e')}
               >
-                WA
+                <MessageCircle size={18} />
               </a>
             </div>
           </div>
@@ -102,23 +104,35 @@ export default function Footer() {
         </div>
 
         {/* Contact strip */}
-        <div className="mt-10 pt-8 border-t grid sm:grid-cols-3 gap-4" style={{ borderColor: '#2e2d2e' }}>
+        <div className="mt-10 pt-8 border-t grid sm:grid-cols-2 lg:grid-cols-4 gap-4" style={{ borderColor: '#2e2d2e' }}>
           {[
-            { icon: <Phone size={16} />, text: '+92 42 3529 6000', href: 'tel:+924235296000' },
-            { icon: <Mail size={16} />, text: 'info@educareinternational.pk', href: 'mailto:info@educareinternational.pk' },
-            { icon: <MapPin size={16} />, text: 'Lahore, Pakistan', href: 'https://maps.app.goo.gl/EsjNKmbxyrkVfsej6' },
-          ].map(({ icon, text, href }) => (
-            <a
-              key={text}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm hover:text-white transition-colors"
-            >
-              <span style={{ color: '#a86699' }}>{icon}</span>
-              {text}
-            </a>
-          ))}
+            { icon: <Phone size={16} />, text: CONTACT.phoneIntl, call: true },
+            { icon: <MessageCircle size={16} />, text: CONTACT.whatsapp, href: whatsappHref() },
+            { icon: <Mail size={16} />, text: CONTACT.email, href: `mailto:${CONTACT.email}` },
+            { icon: <MapPin size={16} />, text: 'Lahore, Pakistan', href: CONTACT.mapsUrl },
+          ].map(({ icon, text, href, call }) =>
+            call ? (
+              <CallLink
+                key={text}
+                accent="#8e2778"
+                className="flex items-center gap-2 text-sm text-left hover:text-white transition-colors"
+              >
+                <span style={{ color: '#a86699' }}>{icon}</span>
+                {text}
+              </CallLink>
+            ) : (
+              <a
+                key={text}
+                href={href}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm hover:text-white transition-colors"
+              >
+                <span style={{ color: '#a86699' }}>{icon}</span>
+                {text}
+              </a>
+            ),
+          )}
         </div>
 
         {/* Bottom bar */}

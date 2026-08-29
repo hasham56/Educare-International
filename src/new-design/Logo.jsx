@@ -1,11 +1,11 @@
-// New EduCare logo ("eic | EduCare — Where Education Meets Care").
-// The source jpeg has a near-white background, so on dark surfaces we sit it
-// inside a soft white plate; on light surfaces it blends directly.
+// EduCare logo ("eic | EduCare — Where Education Meets Care").
+// The artwork is dark purple/charcoal on transparency, so it drops straight
+// onto light surfaces; on dark surfaces pass `plate` to sit it on a white card.
 
 export default function Logo({ className = 'h-10', plate = false }) {
   const img = (
     <img
-      src="/new_logo_trimmed.png"
+      src="/educare-logo.png"
       alt="EduCare — Where Education Meets Care"
       className={`${className} w-auto object-contain`}
       draggable={false}

@@ -1,1 +1,6 @@
+# The redesign is now the site root. Keep old /new-design links working.
+/new-design       /   301!
+/new-design/*     /   301!
+
+# SPA fallback — every other path is served by index.html.
 /*    /index.html   200

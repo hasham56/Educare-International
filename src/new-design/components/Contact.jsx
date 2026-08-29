@@ -5,8 +5,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send, CheckCircle } from 'lucide-react';
-import { C, CONTACT, whatsappHref } from '../theme';
+import { C, CONTACT, SERVICE_TOPICS, whatsappHref } from '../theme';
 import { Container, SectionHeader, PrimaryButton, viewport } from '../ui';
+import CallLink from '../../shared/CallLink';
 
 const INFO = [
   {
@@ -20,10 +21,11 @@ const INFO = [
   {
     icon: Phone,
     label: 'Call Us',
-    value: '042 35296000',
-    href: `tel:${CONTACT.landlineTel}`,
-    sub: 'Mobile: 0300 7955551',
-    subHref: `tel:${CONTACT.mobileTel}`,
+    value: CONTACT.phone,
+    call: true,
+    sub: `WhatsApp: ${CONTACT.whatsapp}`,
+    subHref: whatsappHref(),
+    subExternal: true,
   },
   {
     icon: Mail,
@@ -51,8 +53,8 @@ const SERVICES = [
 const inputBase =
   'w-full rounded-lg border px-4 py-2.5 text-sm bg-white outline-none transition-colors';
 
-function InfoCard({ icon: Icon, label, value, href, external, sub, subHref }) {
-  const ValueTag = href ? 'a' : 'div';
+function InfoCard({ icon: Icon, label, value, href, external, call, sub, subHref, subExternal }) {
+  const ValueTag = call ? CallLink : href ? 'a' : 'div';
   return (
     <div
       className="rounded-xl p-5 border h-full"
@@ -71,13 +73,15 @@ function InfoCard({ icon: Icon, label, value, href, external, sub, subHref }) {
         {label}
       </p>
       <ValueTag
-        {...(href
-          ? {
-              href,
-              ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
-            }
-          : {})}
-        className="block text-sm font-semibold leading-snug break-words transition-colors hover:opacity-80"
+        {...(call
+          ? { accent: C.royal }
+          : href
+            ? {
+                href,
+                ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+              }
+            : {})}
+        className="block text-left text-sm font-semibold leading-snug break-words transition-colors hover:opacity-80"
         style={{ color: C.ink }}
       >
         {value}
@@ -86,6 +90,7 @@ function InfoCard({ icon: Icon, label, value, href, external, sub, subHref }) {
         (subHref ? (
           <a
             href={subHref}
+            {...(subExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className="block text-xs mt-1 break-words transition-colors hover:opacity-80"
             style={{ color: C.body }}
           >
@@ -111,6 +116,9 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  // Opener follows the selected program, so the chat starts on the right topic.
+  const whatsappTopic = SERVICE_TOPICS[form.service] ?? 'general';
 
   const focusOn = (e) => (e.currentTarget.style.borderColor = C.royal);
   const focusOff = (e) => (e.currentTarget.style.borderColor = C.lilac);
@@ -156,7 +164,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <motion.a
-              href={whatsappHref()}
+              href={whatsappHref(whatsappTopic)}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}

@@ -63,17 +63,21 @@ export default function About() {
               style={{ background: 'linear-gradient(135deg, #692658 0%, #8e2778 60%, #a86699 100%)' }}
             >
               <div className="text-center">
-                <motion.img
-                  src="/educare_logo.png"
-                  alt="EduCare International"
-                  className="w-40 h-40 object-contain rounded-full mx-auto mb-4 shadow-2xl"
-                  style={{ background: 'white', padding: '8px' }}
-                  initial={{ scale: 0.7, opacity: 0 }}
+                <motion.div
+                  className="mx-auto mb-5 inline-flex items-center justify-center rounded-2xl bg-white px-6 py-5 shadow-2xl"
+                  initial={{ scale: 0.85, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  whileHover={{ scale: 1.05 }}
-                />
+                  whileHover={{ scale: 1.04 }}
+                >
+                  <img
+                    src="/educare-logo.png"
+                    alt="EduCare International — Where Education Meets Care"
+                    className="h-16 sm:h-20 w-auto object-contain"
+                    draggable={false}
+                  />
+                </motion.div>
                 <div className="text-white text-xl font-bold">EduCare International</div>
                 <div className="text-sm mt-1" style={{ color: '#dcbad4' }}>Lahore, Pakistan</div>
               </div>

@@ -24,24 +24,9 @@ export const GRADIENTS = {
   deep:  'linear-gradient(160deg, #2A0E47 0%, #37145C 100%)',
 };
 
-// Contact details (sourced from the brand poster).
-export const CONTACT = {
-  whatsappNumber: '923007955551',          // +92 300 7955551 (mobile)
-  whatsappMessage:
-    "Hello EduCare! I'd like to know more about your IELTS / PTE / Visa programs.",
-  mobile:    '0300 7955551',
-  mobileTel: '+923007955551',
-  landline:  '042 35296000',
-  landlineTel: '+924235296000',
-  email:     'info@educareinternational.pk',
-  address:   'Allama Iqbal Town, Lahore',
-  mapsUrl:   'https://maps.app.goo.gl/EsjNKmbxyrkVfsej6',
-  facebook:  'https://www.facebook.com/educare.lhr',
-  instagram: 'https://www.instagram.com/educare.international/',
-};
-
-export const whatsappHref = () =>
-  `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(CONTACT.whatsappMessage)}`;
+// Contact details live in src/shared/contact.js so the original site and the
+// redesign can never drift apart. Re-exported here for existing imports.
+export { CONTACT, WHATSAPP_MESSAGES, SERVICE_TOPICS, whatsappHref } from '../shared/contact';
 
 export const NAV_LINKS = [
   { label: 'Home',     href: '#home' },
